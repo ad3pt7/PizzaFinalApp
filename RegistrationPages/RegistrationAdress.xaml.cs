@@ -24,5 +24,15 @@ namespace PizzaFinalApp.RegistrationPages
         {
             InitializeComponent();
         }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FinishRegistration(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -20,9 +20,11 @@ namespace PizzaFinalApp.AdminPages
     /// </summary>
     public partial class AdminPanel : Page
     {
+        PizzaContext context = new PizzaContext();
         public AdminPanel()
         {
             InitializeComponent();
+            PizzasListView.ItemsSource = context.Dishes.ToList();
         }
 
         private void EditPizza(object sender, RoutedEventArgs e)
@@ -31,6 +33,11 @@ namespace PizzaFinalApp.AdminPages
         }
 
         private void DeletePizza(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
         {
 
         }

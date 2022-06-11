@@ -24,5 +24,20 @@ namespace PizzaFinalApp.RegistrationPages
         {
             InitializeComponent();
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LogIn(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RegIn(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

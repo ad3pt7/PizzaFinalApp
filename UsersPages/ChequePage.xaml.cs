@@ -24,5 +24,10 @@ namespace PizzaFinalApp.UsersPages
         {
             InitializeComponent();
         }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
