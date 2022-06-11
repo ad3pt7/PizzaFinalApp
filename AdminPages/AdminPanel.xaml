@@ -277,16 +277,34 @@
                                                 DisplayMemberBinding="{Binding FullName}"/>
                                 <GridViewColumn Header="Заказ"
                                                 Width="240"
-                                                DisplayMemberBinding="{Binding OrderDishes}"/>
+                                                DisplayMemberBinding="{Binding Composition}"/>
                                 <GridViewColumn Header="Цена"
                                                 Width="80"
-                                                DisplayMemberBinding="{Binding }"/>
-                                <GridViewColumn Header="Статус"/>
-                                <GridViewColumn Header="Действия"/>
+                                                DisplayMemberBinding="{Binding TotalCost}"/>
+                                <GridViewColumn Header="Статус"
+                                                Width="60"
+                                                DisplayMemberBinding="{Binding OrderStatus}"/>
+                                <GridViewColumn Header="Действия"
+                                                Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Изменить"
+                                                    Style="{StaticResource RedButton}"
+                                                    Width="80"
+                                                    Height="25"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Статистика">
+                <Grid Background="#ffe5e5e5">
+                    <Canvas/>
+                </Grid>
+                
             </TabItem>
         </TabControl>
     </Grid>

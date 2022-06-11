@@ -11,7 +11,8 @@ namespace PizzaFinalApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class OrderDish
     {
         public int Id { get; set; }
@@ -19,6 +20,8 @@ namespace PizzaFinalApp
         public int Amount { get; set; }
         public int SelectedDishSize { get; set; }
         public int OrderId { get; set; }
+        [NotMapped]
+        public float DishCost => Amount * Dish.Price;
     
         public virtual Dish Dish { get; set; }
         public virtual Order Order { get; set; }

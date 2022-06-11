@@ -70,6 +70,12 @@
     <Compile Include="AdminPages\AdminPanel.xaml.cs">
       <DependentUpon>AdminPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\DishEdit.xaml.cs">
+      <DependentUpon>DishEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\UserEdit.xaml.cs">
+      <DependentUpon>UserEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dish.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
     </Compile>
@@ -137,6 +143,14 @@
       <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminPages\AdminPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminPages\DishEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminPages\UserEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,6 +12,7 @@ namespace PizzaFinalApp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class Order
     {
@@ -20,7 +21,7 @@ namespace PizzaFinalApp
         {
             this.OrderDishes = new HashSet<OrderDish>();
         }
-    
+
         public int Id { get; set; }
         public int StatusId { get; set; }
         public int UserId { get; set; }
@@ -28,7 +29,10 @@ namespace PizzaFinalApp
         [NotMapped]
         public string FullName => $"{User.LastName} {User.FirstName} {User.MiddleName}";
         [NotMapped]
-        public float TotalCost => 
+        public string Composition => string.Join(",", OrderDishes.Select(od => $" {od.Amount}x{od.Dish.Name}({od.SelectedDishSize} см)"));
+        [NotMapped]
+        public float TotalCost => OrderDishes.Sum(o => o.DishCost);
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDish> OrderDishes { get; set; }
