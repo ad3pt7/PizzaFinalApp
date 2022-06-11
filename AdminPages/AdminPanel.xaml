@@ -131,6 +131,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="80"/>
                                             <ColumnDefinition Width="90*"/>
+                                            <ColumnDefinition Width="80"/>
                                         </Grid.ColumnDefinitions>
                                         <Image  Grid.Column="0" 
                                                 VerticalAlignment="Center"  
@@ -138,6 +139,23 @@
                                                 Margin="5" 
                                                 Height="64" 
                                                 Width="64"/>
+                                        <StackPanel Grid.Column="2">
+                                            <Button Click="EditPizza"
+                                                    Content="Изменить"
+                                                    Style="{StaticResource RedButton}"
+                                                    Width="60"
+                                                    Margin="10 10 10 0"
+                                                    HorizontalAlignment="Right"
+                                                    Height="20" />
+
+                                            <Button Click="DeletePizza"  
+                                                    Content="Удалить" 
+                                                    Style="{StaticResource RedButton}" 
+                                                     Width="60" 
+                                                    Margin="10 10 10 0"
+                                                     HorizontalAlignment="Right"
+                                                     Height="20"/>
+                                        </StackPanel>
                                         <StackPanel Grid.Column="1">
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -145,26 +163,10 @@
                                                     <RowDefinition Height="100*"/>
                                                     <RowDefinition Height="50"/>
                                                 </Grid.RowDefinitions>
+                                               
                                                 <Label Content="{Binding Name}" 
                                                        FontSize="16" 
                                                        FontWeight="Bold"/>
-                                                <Button Click="EditPizza"
-                                                        Content="Удалить"
-                                                        Style="{StaticResource RedButton}"
-                                                        Margin="0,0,20,0"
-                                                        Width="60"
-                                                        HorizontalAlignment="Right"
-                                                        VerticalAlignment="Top"
-                                                        Height="20" />
-                                                        
-                                                <Button Click="DeletePizza"  
-                                                        Content="Изменить" 
-                                                        Style="{StaticResource RedButton}" 
-                                                        Margin="0,40,20,0" 
-                                                        VerticalAlignment="Top"
-                                                        Width="60" 
-                                                        HorizontalAlignment="Right"
-                                                        Height="20"/>
                                                 
                                                 <TextBlock Grid.Row="1" 
                                                            Text="{Binding Description}" 
@@ -194,6 +196,96 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ингридиенты">
+                <Grid Background="#ffe5e5e5">
+                    <TextBox Height="23" 
+                             VerticalAlignment="Top"
+                             Margin="10 10 10 0"/>
+                    <ListView x:Name="IngridientsList"
+                              Margin="10 40"
+                              Foreground="Black">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Код"
+                                                DisplayMemberBinding="{Binding Id}"
+                                                Width="40"/>
+                                <GridViewColumn Header="Название"
+                                                DisplayMemberBinding="{Binding Name}"
+                                                Width="120"/>
+                                <GridViewColumn Header="Вес"
+                                                DisplayMemberBinding="{Binding Weight}"
+                                                Width="80"/>
+                                <GridViewColumn Header="Цена"
+                                                DisplayMemberBinding="{Binding Price}"
+                                                Width="80"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Добавить"
+                            Width="75"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            Margin=" 20 0 0 5"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource RedButton}"/>
+                    <Button Content="Изменить"
+                            Width="75"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="120 0 0 5"
+                            Height="25"
+                            Style="{StaticResource RedButton}"/>
+                    <Button Content="Удалить"
+                            Width="75"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="220 0 0 5"
+                            Height="25"
+                            Style="{StaticResource RedButton}"/>
+                    <Button Content="Экспорт"
+                            Width="75"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 140 5"
+                            Height="25"
+                            Style="{StaticResource RedButton}"/>
+                    <Button Content="Импорт"
+                            Width="75"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Margin="00 0 20 5"
+                            Height="25"
+                            Style="{StaticResource RedButton}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказы">
+                <Grid Background="#ffe5e5e5">
+                    <TextBox Height="23" 
+                             VerticalAlignment="Top"
+                             Margin="10 10 10 0"/>
+                    <ListView x:Name="OrdersList"
+                              Margin="10 40 10 10">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Код"
+                                                Width="40"
+                                                DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Заказчик"
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding FullName}"/>
+                                <GridViewColumn Header="Заказ"
+                                                Width="240"
+                                                DisplayMemberBinding="{Binding OrderDishes}"/>
+                                <GridViewColumn Header="Цена"
+                                                Width="80"
+                                                DisplayMemberBinding="{Binding }"/>
+                                <GridViewColumn Header="Статус"/>
+                                <GridViewColumn Header="Действия"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
         </TabControl>

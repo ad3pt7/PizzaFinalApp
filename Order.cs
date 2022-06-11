@@ -11,7 +11,8 @@ namespace PizzaFinalApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,11 @@ namespace PizzaFinalApp
         public int StatusId { get; set; }
         public int UserId { get; set; }
         public System.DateTime Date { get; set; }
-    
+        [NotMapped]
+        public string FullName => $"{User.LastName} {User.FirstName} {User.MiddleName}";
+        [NotMapped]
+        public float TotalCost => 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDish> OrderDishes { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }
