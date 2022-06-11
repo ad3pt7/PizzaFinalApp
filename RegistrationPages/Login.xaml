@@ -1,0 +1,55 @@
+﻿<Page x:Class="PizzaFinalApp.RegistrationPages.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PizzaFinalApp.RegistrationPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Login">
+
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Background="#ffdd3333">
+                <Label Content="Авторизация" Foreground="White" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                <Button Click="Exit" Content="Выйти" Height="25" Width="105" HorizontalAlignment="Right" Style="{StaticResource WhiteButton}" Margin="0,0,25,0" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="25*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                        <Label Content="Введите логин:" Margin="10,0"/>
+                        <TextBox x:Name="UserLogin"/>
+                        <Label Content="Введите пароль:" Margin="10,0"/>
+                        <PasswordBox x:Name="UserPassword"/>
+                        <CheckBox x:Name="RememberUser" Content="Запомнить" Margin="10"/>
+                        <Grid Height="25">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="60*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Click="LogIn" Content="Войти" Margin="0,0,10,0" Style="{StaticResource RedButton}"/>
+                            <Button Click="RegIn" Content="Регистрация" Margin="5,0,0,0" Grid.Column="1" Style="{StaticResource RedButton}" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    
+</Page>
