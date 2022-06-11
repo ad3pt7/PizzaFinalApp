@@ -24,5 +24,15 @@ namespace PizzaFinalApp.AdminPages
         {
             InitializeComponent();
         }
+
+        private void EditPizza(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeletePizza(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

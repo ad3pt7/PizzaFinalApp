@@ -104,6 +104,98 @@
                             Style="{StaticResource RedButton}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Блюда">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox Height="23" 
+                             VerticalAlignment="Top"
+                             Margin="10 10 10 0"/>
+                    <ListView x:Name="PizzasListView"
+                              Grid.Row="1" Margin="15 40 15 40"   
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              Background="Transparent">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Stretch"/>
+                                <Setter Property="HorizontalContentAlignment" 
+                                        Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Top" 
+                                            Background="#FFE5E5E5" 
+                                            Margin="5,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="90*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image  Grid.Column="0" 
+                                                VerticalAlignment="Center"  
+                                                Source="{Binding Image}" 
+                                                Margin="5" 
+                                                Height="64" 
+                                                Width="64"/>
+                                        <StackPanel Grid.Column="1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"/>
+                                                    <RowDefinition Height="100*"/>
+                                                    <RowDefinition Height="50"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Content="{Binding Name}" 
+                                                       FontSize="16" 
+                                                       FontWeight="Bold"/>
+                                                <Button Click="EditPizza"
+                                                        Content="Удалить"
+                                                        Style="{StaticResource RedButton}"
+                                                        Margin="0,0,20,0"
+                                                        Width="60"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Top"
+                                                        Height="20" />
+                                                        
+                                                <Button Click="DeletePizza"  
+                                                        Content="Изменить" 
+                                                        Style="{StaticResource RedButton}" 
+                                                        Margin="0,40,20,0" 
+                                                        VerticalAlignment="Top"
+                                                        Width="60" 
+                                                        HorizontalAlignment="Right"
+                                                        Height="20"/>
+                                                
+                                                <TextBlock Grid.Row="1" 
+                                                           Text="{Binding Description}" 
+                                                           TextWrapping="Wrap"/>
+                                                <TextBlock Grid.Row="1" 
+                                                           Text="{Binding DishIngredients}"
+                                                           TextWrapping="Wrap" 
+                                                           Margin="0,20,0,0"/>
+                                                <StackPanel Grid.Row="2">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="33*"/>
+                                                            <ColumnDefinition Width="37*"/>
+                                                            <ColumnDefinition Width="40*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Content="{Binding Price}" 
+                                                               ContentStringFormat="{}Цена: {0}p"/>
+                                                        <Label Content="{Binding Weight}" 
+                                                               Grid.Column="1" 
+                                                               ContentStringFormat="{}Вес: {0}p"/>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        </ListView>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>
