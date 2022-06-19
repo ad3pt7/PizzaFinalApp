@@ -20,9 +20,57 @@ namespace PizzaFinalApp.RegistrationPages
     /// </summary>
     public partial class RegistrationFinal : Page
     {
+        PizzaContext context = new PizzaContext();
         public RegistrationFinal()
         {
             InitializeComponent();
+            CreateUserPassword();
         }
+
+        private void EndRegistration(object sender, RoutedEventArgs e)
+        {
+            User newUser = new User
+            {
+                Login = RegistrationUser.Login,
+                Email = RegistrationUser.Email,
+                FirstName = RegistrationUser.FirstName,
+                LastName = RegistrationUser.LastName,
+                MiddleName = RegistrationUser.MiddleName,
+                Phone = RegistrationUser.Phone,
+                Floor = RegistrationUser.Floor,
+                Street = RegistrationUser.Street,
+                Porch = RegistrationUser.Porch,
+                Building = RegistrationUser.Building,
+                Password = RegistrationUser.Password,
+                Room = RegistrationUser.Room,
+                RightGroupId = 2
+            };
+            context.Users.Add(newUser);
+            context.SaveChanges();
+            Navigator.Navigate(new Login());
+        }
+
+        public void CreateUserPassword()
+        {
+            var password = string.Empty;
+            var random = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var nextPart = (char)random.Next(0x21, 0x7E);
+                if (nextPart != 0x2C)
+                {
+                    password += nextPart;
+                }
+                else
+                {
+                    i--;
+                    continue;
+                }
+            }
+            RegistrationUser.Password = password;
+            UserPassword.Content = password;
+        }
+
     }
 }

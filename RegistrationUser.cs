@@ -16,7 +16,7 @@ namespace PizzaFinalApp
         public static string MiddleName { get; set; }
 
         public static string Phone { get; set; }
-        public static int Street { get; set; }
+        public static string Street { get; set; }
         public static int Building { get; set; }
         public static int Room { get; set; }
         public static int Porch { get; set; }

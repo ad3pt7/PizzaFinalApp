@@ -24,6 +24,10 @@ namespace PizzaFinalApp.RegistrationPages
         public RegistrationEmail()
         {
             InitializeComponent();
+            if(RegistrationUser.Email != null)
+            {
+                UserMail.Text = RegistrationUser.Email;
+            }
         }
 
         private void Back(object sender, RoutedEventArgs e)
