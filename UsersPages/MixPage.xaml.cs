@@ -16,21 +16,13 @@ using System.Windows.Shapes;
 namespace PizzaFinalApp.UsersPages
 {
     /// <summary>
-    /// Логика взаимодействия для ChequePage.xaml
+    /// Логика взаимодействия для MixPage.xaml
     /// </summary>
-    public partial class ChequePage : Page
+    public partial class MixPage : Page
     {
-        User currentUser;
-        public ChequePage(User user)
+        public MixPage()
         {
             InitializeComponent();
-            currentUser = user;
-        }
-
-
-        private void OpenMenu(object sender, RoutedEventArgs e)
-        {
-            Navigator.Navigate(new MainCatalog(currentUser));
         }
     }
 }

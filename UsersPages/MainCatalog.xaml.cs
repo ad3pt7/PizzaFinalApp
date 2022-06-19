@@ -31,11 +31,6 @@ namespace PizzaFinalApp.UsersPages
 
         }
 
-        private void Back(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ChangePriceAndWeightTo23cm(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("1");
@@ -107,6 +102,14 @@ namespace PizzaFinalApp.UsersPages
             weightTextBox.GetBindingExpression(ContentProperty).UpdateTarget();
         }
 
-        
+        private void GoToOrder(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate(new Orders(currentUser));
+        }
+
+        private void GoToMix(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

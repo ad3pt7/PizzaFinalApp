@@ -35,7 +35,7 @@
                     Style="{StaticResource WhiteButton}"
                     Margin="0,0,25,0" />
         </Grid>
-        <TabControl Grid.Row="1" Margin="5">
+        <TabControl Grid.Row="1" Margin="15">
             <TabItem Header="Основное">
                 <Grid Background="#ffe5e5e5">
                     <Label Content="Наименование"
@@ -84,7 +84,7 @@
                                   x:Name="IngridientScroll"
                                   HorizontalScrollBarVisibility="Disabled"
                                   VerticalScrollBarVisibility="Visible">
-
+                        
                         <ItemsControl Margin="0 5"
                                       ItemsSource="{Binding Ingredients, UpdateSourceTrigger=PropertyChanged}" >
                             <ItemsControl.ItemTemplate>
@@ -130,6 +130,115 @@
                     </ScrollViewer>
                 </Grid>
             </TabItem>
+            <TabItem Header="Стоимость">
+                <Grid Background="#ffe5e5e5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+                          Margin="10 5">
+                        <Border BorderBrush="Black"
+                                BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Content="23 см."
+                                       Margin="10 0 0 0"
+                                       FontWeight="Bold"/>
+                                <Label Content="Стоимость:"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                                <Label Content="Вес:"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         Grid.Column="1"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="1"
+                          Margin="10 5">
+                        <Border BorderBrush="Black"
+                                BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Content="30 см."
+                                       Margin="10 0 0 0"
+                                       FontWeight="Bold"/>
+                                <Label Content="Стоимость:"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                                <Label Content="Вес:"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         Grid.Column="1"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          Margin="10 5">
+                        <Border BorderBrush="Black"
+                                BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Content="40 см."
+                                       Margin="10 0 0 0"
+                                       FontWeight="Bold"/>
+                                <Label Content="Стоимость:"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                                <Label Content="Вес:"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       Margin="10 0 0 25"/>
+                                <TextBox Height="23"
+                                         Grid.Column="1"
+                                         VerticalAlignment="Bottom"
+                                         Margin="10 0 10 5"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
         </TabControl>
+        <Button Grid.Row="2"
+                Content="Добавить"
+                Width="120"
+                Height="24"
+                Style="{StaticResource RedButton}"
+                Margin="15"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"/>
     </Grid>
 </Page>
+
+    

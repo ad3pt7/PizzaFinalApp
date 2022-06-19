@@ -27,8 +27,8 @@
                    FontSize="20" 
                    Margin="70,0,0,0"
                    FontWeight="Bold"/>
-            <Button Click="Back" 
-                    Content="Назад"
+            <Button Click="OpenMenu" 
+                    Content="Меню"
                     Height="25" 
                     Width="105"
                     HorizontalAlignment="Right"

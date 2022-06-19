@@ -20,14 +20,16 @@ namespace PizzaFinalApp.UsersPages
     /// </summary>
     public partial class Orders : Page
     {
-        public Orders()
+        User currentUser;
+        public Orders(User user)
         {
             InitializeComponent();
+            currentUser = user;
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void OpenMenu(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new MainCatalog(currentUser));
         }
     }
 }

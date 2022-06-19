@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PizzaFinalApp.UsersPages
+namespace PizzaFinalApp.AdminPages
 {
     /// <summary>
-    /// Логика взаимодействия для ChequePage.xaml
+    /// Логика взаимодействия для IngredientEdit.xaml
     /// </summary>
-    public partial class ChequePage : Page
+    public partial class IngredientEdit : Page
     {
-        User currentUser;
-        public ChequePage(User user)
+        public IngredientEdit()
         {
             InitializeComponent();
-            currentUser = user;
-        }
-
-
-        private void OpenMenu(object sender, RoutedEventArgs e)
-        {
-            Navigator.Navigate(new MainCatalog(currentUser));
         }
     }
 }

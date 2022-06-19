@@ -73,6 +73,9 @@
     <Compile Include="AdminPages\DishEdit.xaml.cs">
       <DependentUpon>DishEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\IngredientEdit.xaml.cs">
+      <DependentUpon>IngredientEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,9 @@
     <Compile Include="UsersPages\MainCatalog.xaml.cs">
       <DependentUpon>MainCatalog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UsersPages\MixPage.xaml.cs">
+      <DependentUpon>MixPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UsersPages\Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>
@@ -148,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminPages\DishEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminPages\IngredientEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UsersPages\MainCatalog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UsersPages\MixPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
