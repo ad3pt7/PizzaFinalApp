@@ -23,7 +23,7 @@ namespace PizzaFinalApp
         {
             InitializeComponent();
             Navigator.SetFrame(Frame);
-            Navigator.Navigate(new AdminPages.DishEdit());
+            Navigator.Navigate(new RegistrationPages.Login());
            // Navigator.Navigate(new RegistrationPages.AuthorizationPage());
         }
     }

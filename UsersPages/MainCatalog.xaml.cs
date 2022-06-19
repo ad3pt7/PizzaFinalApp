@@ -22,9 +22,11 @@ namespace PizzaFinalApp.UsersPages
     public partial class MainCatalog : Page
     {
         PizzaContext context = new PizzaContext();
-        public MainCatalog()
+        User currentUser;
+        public MainCatalog(User user)
         {
             InitializeComponent();
+            currentUser = user;
             PizzasListView.ItemsSource = context.Dishes.ToList();
 
         }

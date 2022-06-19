@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,11 +28,22 @@ namespace PizzaFinalApp.RegistrationPages
 
         private void Back(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new Login());
         }
 
         private void NextStep(object sender, RoutedEventArgs e)
         {
+            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); ;
+            if(!string.IsNullOrEmpty(UserMail.Text) && emailRegex.IsMatch(UserMail.Text))
+            {
+                RegistrationUser.Login = UserMail.Text;
+                RegistrationUser.Email = UserMail.Text;
+                Navigator.Navigate(new RegistrationName());
+            }
+            else
+            {
+                MessageBox.Show("Проверьте правильность введенных данных","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
 
         }
     }

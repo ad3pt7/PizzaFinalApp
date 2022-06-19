@@ -124,6 +124,7 @@
     <Compile Include="RegistrationPages\RegistrationPhone.xaml.cs">
       <DependentUpon>RegistrationPhone.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegistrationUser.cs" />
     <Compile Include="RightGroup.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
     </Compile>

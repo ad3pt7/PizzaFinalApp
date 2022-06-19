@@ -27,7 +27,7 @@ namespace PizzaFinalApp.RegistrationPages
 
         private void Back(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new RegistrationEmail());
         }
 
         private void NextStep(object sender, RoutedEventArgs e)

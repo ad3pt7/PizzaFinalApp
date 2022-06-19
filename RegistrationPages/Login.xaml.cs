@@ -20,6 +20,7 @@ namespace PizzaFinalApp.RegistrationPages
     /// </summary>
     public partial class Login : Page
     {
+        PizzaContext context = new PizzaContext();
         public Login()
         {
             InitializeComponent();
@@ -27,17 +28,25 @@ namespace PizzaFinalApp.RegistrationPages
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void LogIn(object sender, RoutedEventArgs e)
         {
-
+            var user = context.Users.Where(u => u.Login == UserLogin.Text && u.Password == UserPassword.Password).FirstOrDefault();
+            if(user != null)
+            {
+                Navigator.Navigate(new UsersPages.MainCatalog(user));
+            }
+            else
+            {
+                MessageBox.Show("Проверьте правильность введенных данных","Ошибка авторизации",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
         }
 
         private void RegIn(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new RegistrationEmail());
         }
     }
 }
