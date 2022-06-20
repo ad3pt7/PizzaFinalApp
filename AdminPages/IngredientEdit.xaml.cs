@@ -24,5 +24,10 @@ namespace PizzaFinalApp.AdminPages
         {
             InitializeComponent();
         }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

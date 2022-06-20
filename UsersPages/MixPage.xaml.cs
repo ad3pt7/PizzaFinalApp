@@ -20,9 +20,21 @@ namespace PizzaFinalApp.UsersPages
     /// </summary>
     public partial class MixPage : Page
     {
+        PizzaContext context = new PizzaContext();
         public MixPage()
         {
             InitializeComponent();
+            IngredientListView.ItemsSource = context.Ingredients.ToList();
+        }
+
+        private void AddDish(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenMenu(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
