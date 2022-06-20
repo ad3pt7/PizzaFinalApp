@@ -27,11 +27,12 @@ namespace PizzaFinalApp.AdminPages
             InitializeComponent();
             UsersList.ItemsSource = context.Users.ToList();
             PizzasListView.ItemsSource = context.Dishes.ToList();
+            IngridientsList.ItemsSource = context.Ingredients.ToList();
         }
 
         private void EditPizza(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new DishEdit((sender as Button).DataContext as Dish));
         }
 
         private void DeletePizza(object sender, RoutedEventArgs e)
@@ -78,7 +79,8 @@ namespace PizzaFinalApp.AdminPages
 
         private void AddPizza(object sender, RoutedEventArgs e)
         {
-
+            
+            Navigator.Navigate(new DishEdit(null));
         }
 
         private void SearchCertainUsers(object sender, TextChangedEventArgs e)
@@ -98,7 +100,15 @@ namespace PizzaFinalApp.AdminPages
 
         private void SearchCertainPizza(object sender, TextChangedEventArgs e)
         {
-
+            if (PizzaFilter.Text == "")
+            {
+                PizzasListView.ItemsSource = context.Dishes.ToList();
+            }
+            else
+            {
+                var pizza = context.Dishes.ToList();
+                PizzasListView.ItemsSource = pizza.Where(u => u.Name.ToLower().Contains(PizzaFilter.Text.ToLower()));
+            }
         }
     }
 }

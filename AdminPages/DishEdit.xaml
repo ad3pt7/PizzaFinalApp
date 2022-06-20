@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="100*"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid Background="#ffdd3333">
@@ -42,11 +42,13 @@
                            Margin="10"/>
                     <TextBox Margin="10 40 40 0"
                              Height="23"
+                             x:Name="DishName"
                              VerticalAlignment="Top"/>
                     <Label Content="Описание"
                            Margin="10 60"/>
                     <TextBox Margin="10 85 40 0"
                              Height="23"
+                             x:Name="Desciption"
                              VerticalAlignment="Top"/>
                     <Label Content="Изображение"
                            Margin="10 110"/>
@@ -57,16 +59,18 @@
                                 <ColumnDefinition Width="155"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Margin="10 135 0 0"
-                                 Height="23"
-                                 VerticalAlignment="Top"/>
+                                     Height="23"
+                                     x:Name="Photo"
+                                    VerticalAlignment="Top"/>
                             <Button Width="135"
-                                Height="23"
-                                Margin="10 135 10 0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Grid.Column="1"
-                                Style="{StaticResource RedButton}"
-                                Content="Выбрать"/>
+                                    Height="23"
+                                    Click="ChoosePhoto"
+                                    Margin="10 135 10 0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Grid.Column="1"
+                                    Style="{StaticResource RedButton}"
+                                    Content="Выбрать"/>
                         </Grid>
                     </StackPanel>
                     <Image x:Name="DishImage"
@@ -80,14 +84,18 @@
                     <TextBox Height="23" 
                              VerticalAlignment="Top"
                              Margin="10 10 10 0"/>
-                    <ScrollViewer Grid.Row="1"
-                                  x:Name="IngridientScroll"
-                                  HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Visible">
-                        
-                        <ItemsControl Margin="0 5"
-                                      ItemsSource="{Binding Ingredients, UpdateSourceTrigger=PropertyChanged}" >
-                            <ItemsControl.ItemTemplate>
+                    <ListView Grid.Row="1"                             
+                              x:Name="IngridientList">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Stretch"/>
+                                <Setter Property="HorizontalContentAlignment" 
+                                        Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="0 5"
                                           Background="LightGray">
@@ -99,7 +107,7 @@
                                         <Image Width="45"
                                                Height="45"
                                                Margin="5"
-                                               Source="../Images/icon(white).png"/>
+                                               Source="../Images/icon.png"/>
                                         <StackPanel Grid.Column="1">
                                             <Label Margin="0 0 0 5"
                                                    Content="{Binding Name}"
@@ -115,19 +123,27 @@
                                         <StackPanel Grid.Column="2"
                                                     Margin="10 0"
                                                     Orientation="Horizontal">
+                                            <CheckBox x:Name="HasInPizza"
+                                                      VerticalAlignment="Center"
+                                                      IsEnabled="False"
+                                                      IsChecked="{Binding HasInPizza}"/>
                                             <Button Margin="5 0"
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Center"
+                                                    Click="RemoveFromPizza"
+                                                    Style="{StaticResource RedButton}"
                                                     Content="Убрать"/>
                                             <Button HorizontalAlignment="Right"
+                                                    Style="{StaticResource RedButton}"
                                                     VerticalAlignment="Center"
+                                                    Click="AddToPizza"
                                                     Content="Добавить" />
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                            </ListView.ItemTemplate>
+                        
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem Header="Стоимость">
@@ -154,6 +170,7 @@
                                        VerticalAlignment="Bottom"
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
+                                         x:Name="PriceFor23cm"
                                          VerticalAlignment="Bottom"
                                          Margin="10 0 10 5"/>
                                 <Label Content="Вес:"
@@ -162,6 +179,7 @@
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
                                          Grid.Column="1"
+                                         x:Name="WeightFor23cm"
                                          VerticalAlignment="Bottom"
                                          Margin="10 0 10 5"/>
                             </Grid>
@@ -185,12 +203,14 @@
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
                                          VerticalAlignment="Bottom"
+                                         x:Name="PriceFor30cm"
                                          Margin="10 0 10 5"/>
                                 <Label Content="Вес:"
                                        Grid.Column="1"
                                        VerticalAlignment="Bottom"
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
+                                         x:Name="WeightFor30cm"
                                          Grid.Column="1"
                                          VerticalAlignment="Bottom"
                                          Margin="10 0 10 5"/>
@@ -215,6 +235,7 @@
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
                                          VerticalAlignment="Bottom"
+                                         x:Name="PriceFor40cm"
                                          Margin="10 0 10 5"/>
                                 <Label Content="Вес:"
                                        Grid.Column="1"
@@ -222,6 +243,7 @@
                                        Margin="10 0 0 25"/>
                                 <TextBox Height="23"
                                          Grid.Column="1"
+                                         x:Name="WeightFor40cm"
                                          VerticalAlignment="Bottom"
                                          Margin="10 0 10 5"/>
                             </Grid>
@@ -234,6 +256,7 @@
                 Content="Добавить"
                 Width="120"
                 Height="24"
+                Click="SaveChanges"
                 Style="{StaticResource RedButton}"
                 Margin="15"
                 HorizontalAlignment="Right"

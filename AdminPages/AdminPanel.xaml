@@ -116,6 +116,7 @@
             <TabItem Header="Блюда">
                 <Grid Background="#FFE5E5E5">
                     <TextBox Height="23" 
+                             x:Name="PizzaFilter"
                              TextChanged="SearchCertainPizza"
                              VerticalAlignment="Top"
                              Margin="10 10 10 0"/>
@@ -233,6 +234,7 @@
             <TabItem Header="Ингридиенты">
                 <Grid Background="#ffe5e5e5">
                     <TextBox Height="23" 
+                             
                              VerticalAlignment="Top"
                              Margin="10 10 10 0"/>
                     <ListView x:Name="IngridientsList"

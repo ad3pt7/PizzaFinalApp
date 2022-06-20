@@ -11,7 +11,8 @@ namespace PizzaFinalApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Ingredient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,14 @@ namespace PizzaFinalApp
         {
             this.Dishes = new HashSet<Dish>();
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
         public int Price { get; set; }
-    
+        [NotMapped]
+        public bool HasInPizza { get; set; } = false;
+            
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dish> Dishes { get; set; }
     }
