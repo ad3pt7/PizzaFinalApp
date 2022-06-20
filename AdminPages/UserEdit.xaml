@@ -40,48 +40,49 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" 
+            <StackPanel Grid.Column="0"
                         Margin="15">
 
                 <Label Content="Фамилия:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="LastName"/>
                 <Label Content="Имя:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="FirstName"/>
                 <Label Content="Отчество:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="MiddleName"/>
                 <Label Content="Телефон:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Phone"/>
                 <Label Content="Email:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Email"/>
             </StackPanel>
             <StackPanel Grid.Column="1" 
                         Margin="15">
 
                 <Label Content="Улица:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Street"/>
                 <Label Content="Дом:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Building"/>
                 <Label Content="Квартира:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Room"/>
                 <Label Content="Подъезд:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Porch"/>
                 <Label Content="Этаж:"
                        Margin="5,0,0,0"/>
-                <TextBox/>
+                <TextBox x:Name="Floor"/>
             </StackPanel>
         </Grid>
         <Button Content="Добавить"
                 Style="{StaticResource RedButton}"
                 Width="105"
+                Click="SaveUserData"
                 Height="22"
                 Grid.Row="2"
                 HorizontalAlignment="Right"

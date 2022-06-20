@@ -70,12 +70,14 @@
                     <Button Content="Добавить"
                             Width="75"
                             Height="25"
+                            Click="AddUser"
                             HorizontalAlignment="Left"
                             Margin=" 20 0 0 5"
                             VerticalAlignment="Bottom"
                             Style="{StaticResource RedButton}"/>
                     <Button Content="Изменить"
                             Width="75"
+                            Click="EditUser"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Left"
                             Margin="120 0 0 5"
@@ -87,6 +89,7 @@
                             HorizontalAlignment="Left"
                             Margin="220 0 0 5"
                             Height="25"
+                            Click="DeleteUser"
                             Style="{StaticResource RedButton}"/>
                     <Button Content="Экспорт"
                             Width="75"

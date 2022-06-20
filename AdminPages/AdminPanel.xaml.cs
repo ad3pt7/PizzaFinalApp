@@ -25,6 +25,7 @@ namespace PizzaFinalApp.AdminPages
         public AdminPanel()
         {
             InitializeComponent();
+            UsersList.ItemsSource = context.Users.ToList();
             PizzasListView.ItemsSource = context.Dishes.ToList();
         }
 
@@ -39,6 +40,28 @@ namespace PizzaFinalApp.AdminPages
         }
 
         private void Back(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddUser(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate(new UserEdit(null));
+        }
+
+        private void EditUser(object sender, RoutedEventArgs e)
+        {
+            if (UsersList.SelectedIndex != -1)
+            {
+                Navigator.Navigate(new UserEdit(UsersList.SelectedItem as User));
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста выберите пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
         {
 
         }
