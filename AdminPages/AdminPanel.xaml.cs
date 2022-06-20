@@ -75,5 +75,30 @@ namespace PizzaFinalApp.AdminPages
                 MessageBox.Show("Пожалуйста выберите пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void AddPizza(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchCertainUsers(object sender, TextChangedEventArgs e)
+        {
+           // UsersList.Items.Clear();
+            //MessageBox.Show(context.Users.ToList()[0].FullName);
+            if (UsersFilter.Text == "")
+            {
+                UsersList.ItemsSource = context.Users.ToList();
+            }
+            else
+            {
+                var users = context.Users.ToList();
+                UsersList.ItemsSource = users.Where(u => u.FullName.ToLower().Contains(UsersFilter.Text.ToLower()));
+            }
+        }
+
+        private void SearchCertainPizza(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

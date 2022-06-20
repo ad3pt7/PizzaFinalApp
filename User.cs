@@ -11,7 +11,8 @@ namespace PizzaFinalApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -34,6 +35,8 @@ namespace PizzaFinalApp
         public int Porch { get; set; }
         public int Floor { get; set; }
         public int RightGroupId { get; set; }
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName} {MiddleName}";
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
