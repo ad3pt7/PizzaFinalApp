@@ -37,7 +37,7 @@ namespace PizzaFinalApp.RegistrationPages
 
         private void NextStep(object sender, RoutedEventArgs e)
         {
-            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); ;
+            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
             if(!string.IsNullOrEmpty(UserMail.Text) && emailRegex.IsMatch(UserMail.Text))
             {
                 RegistrationUser.Login = UserMail.Text;

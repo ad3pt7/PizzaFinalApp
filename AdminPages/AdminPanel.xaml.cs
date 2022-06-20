@@ -63,7 +63,17 @@ namespace PizzaFinalApp.AdminPages
 
         private void DeleteUser(object sender, RoutedEventArgs e)
         {
-
+            if (UsersList.SelectedIndex != -1)
+            {
+                var selectedUser = UsersList.SelectedItem as User;
+                context.Users.Remove(selectedUser);
+                context.SaveChanges();
+                Navigator.Navigate(new AdminPanel());
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста выберите пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
