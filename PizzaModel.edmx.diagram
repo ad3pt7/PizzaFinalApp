@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cea30d7410da455c8aedc935fac18f81" Name="Diagram1">
+      <Diagram DiagramId="687ed4fca0734489a4d57bb45c0daff4" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="Model.Dish" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Ingredient" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DishIngredient" Width="1.5" PointX="9.875" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Ingredient" Width="1.5" PointX="10.875" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderDish" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderStatus" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.RightGroup" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Size" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Size" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_DishIngredients_Dish" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_OrderDishes_Dishes" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Size_Dish" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DishIngredients_Ingredients" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_OrderDishes_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Orders_OrderStatuses" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Orders_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Users_RightGroups" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.DishIngredients" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

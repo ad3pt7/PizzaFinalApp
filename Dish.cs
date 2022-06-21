@@ -18,16 +18,16 @@ namespace PizzaFinalApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dish()
         {
+            this.DishIngredients = new HashSet<DishIngredient>();
             this.OrderDishes = new HashSet<OrderDish>();
             this.Sizes = new HashSet<Size>();
-            this.Ingredients = new HashSet<Ingredient>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
-        public string DishIngredients => string.Join(",", Ingredients.Select(di => di.Name).ToArray());
+        public string Ingredients => string.Join(",", DishIngredients.Where(di => di.DishId == Id).Select(di => di.Ingredient.Name).ToArray());
         public int SelectedSizeIndex { get; set; } = 0;
         public int Amount
         {
@@ -41,10 +41,10 @@ namespace PizzaFinalApp
         public int Weight => Sizes.ToList()[SelectedSizeIndex].Weight;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DishIngredient> DishIngredients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDish> OrderDishes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Size> Sizes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }

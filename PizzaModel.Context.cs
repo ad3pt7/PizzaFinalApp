@@ -26,6 +26,7 @@ namespace PizzaFinalApp
         }
     
         public virtual DbSet<Dish> Dishes { get; set; }
+        public virtual DbSet<DishIngredient> DishIngredients { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<OrderDish> OrderDishes { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

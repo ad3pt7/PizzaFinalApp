@@ -14,13 +14,11 @@
           <Property Name="Image" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "PI-19-1-22.dbo.DishIngredients" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="DishIngredients">
           <Key>
-            <PropertyRef Name="DishId" />
-            <PropertyRef Name="IngredientId" />
+            <PropertyRef Name="DisnIngridientID" />
           </Key>
+          <Property Name="DisnIngridientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DishId" Type="int" Nullable="false" />
           <Property Name="IngredientId" Type="int" Nullable="false" />
         </EntityType>
@@ -193,6 +191,7 @@
         </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DishIngredients" EntityType="Self.DishIngredients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDishes" EntityType="Self.OrderDishes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -200,12 +199,6 @@
           <EntitySet Name="RightGroups" EntityType="Self.RightGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sizes" EntityType="Self.Sizes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DishIngredients" EntityType="Self.DishIngredients" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DishIngredients].[DishId] AS [DishId], 
-    [DishIngredients].[IngredientId] AS [IngredientId]
-    FROM [dbo].[DishIngredients] AS [DishIngredients]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_DishIngredients_Dish" Association="Self.FK_DishIngredients_Dish">
             <End Role="Dishes" EntitySet="Dishes" />
             <End Role="DishIngredients" EntitySet="DishIngredients" />
@@ -252,9 +245,19 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DishIngredients" Relationship="Self.FK_DishIngredients_Dish" FromRole="Dishes" ToRole="DishIngredients" />
           <NavigationProperty Name="OrderDishes" Relationship="Self.FK_OrderDishes_Dishes" FromRole="Dishes" ToRole="OrderDishes" />
           <NavigationProperty Name="Sizes" Relationship="Self.FK_Size_Dish" FromRole="Dishes" ToRole="Sizes" />
-          <NavigationProperty Name="Ingredients" Relationship="Self.DishIngredients" FromRole="Dishes" ToRole="Ingredients" />
+        </EntityType>
+        <EntityType Name="DishIngredient">
+          <Key>
+            <PropertyRef Name="DisnIngridientID" />
+          </Key>
+          <Property Name="DisnIngridientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="IngredientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK_DishIngredients_Dish" FromRole="DishIngredients" ToRole="Dishes" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK_DishIngredients_Ingredients" FromRole="DishIngredients" ToRole="Ingredients" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -264,7 +267,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Dishes" Relationship="Self.DishIngredients" FromRole="Ingredients" ToRole="Dishes" />
+          <NavigationProperty Name="DishIngredients" Relationship="Self.FK_DishIngredients_Ingredients" FromRole="Ingredients" ToRole="DishIngredients" />
         </EntityType>
         <EntityType Name="OrderDish">
           <Key>
@@ -338,6 +341,18 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="RightGroup" Relationship="Self.FK_Users_RightGroups" FromRole="Users" ToRole="RightGroups" />
         </EntityType>
+        <Association Name="FK_DishIngredients_Dish">
+          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" />
+          <End Role="DishIngredients" Type="Self.DishIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dishes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DishIngredients">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderDishes_Dishes">
           <End Role="Dishes" Type="Self.Dish" Multiplicity="1" />
           <End Role="OrderDishes" Type="Self.OrderDish" Multiplicity="*" />
@@ -359,6 +374,18 @@
             </Principal>
             <Dependent Role="Sizes">
               <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DishIngredients_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="DishIngredients" Type="Self.DishIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DishIngredients">
+              <PropertyRef Name="IngredientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -410,12 +437,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DishIngredients">
-          <End Role="Dishes" Type="Self.Dish" Multiplicity="*" />
-          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="PizzaContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Dishes" EntityType="Self.Dish" />
+          <EntitySet Name="DishIngredients" EntityType="Self.DishIngredient" />
           <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
           <EntitySet Name="OrderDishes" EntityType="Self.OrderDish" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -423,6 +447,10 @@
           <EntitySet Name="RightGroups" EntityType="Self.RightGroup" />
           <EntitySet Name="Sizes" EntityType="Self.Size" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_DishIngredients_Dish" Association="Self.FK_DishIngredients_Dish">
+            <End Role="Dishes" EntitySet="Dishes" />
+            <End Role="DishIngredients" EntitySet="DishIngredients" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderDishes_Dishes" Association="Self.FK_OrderDishes_Dishes">
             <End Role="Dishes" EntitySet="Dishes" />
             <End Role="OrderDishes" EntitySet="OrderDishes" />
@@ -430,6 +458,10 @@
           <AssociationSet Name="FK_Size_Dish" Association="Self.FK_Size_Dish">
             <End Role="Dishes" EntitySet="Dishes" />
             <End Role="Sizes" EntitySet="Sizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DishIngredients_Ingredients" Association="Self.FK_DishIngredients_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="DishIngredients" EntitySet="DishIngredients" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDishes_Orders" Association="Self.FK_OrderDishes_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -447,17 +479,13 @@
             <End Role="RightGroups" EntitySet="RightGroups" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="DishIngredients" Association="Self.DishIngredients">
-            <End Role="Dishes" EntitySet="Dishes" />
-            <End Role="Ingredients" EntitySet="Ingredients" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="PizzaContext">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Dishes">
             <EntityTypeMapping TypeName="Model.Dish">
               <MappingFragment StoreEntitySet="Dishes">
@@ -465,6 +493,15 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DishIngredients">
+            <EntityTypeMapping TypeName="Model.DishIngredient">
+              <MappingFragment StoreEntitySet="DishIngredients">
+                <ScalarProperty Name="DisnIngridientID" ColumnName="DisnIngridientID" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -546,14 +583,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DishIngredients" TypeName="Model.DishIngredients" StoreEntitySet="DishIngredients">
-            <EndProperty Name="Dishes">
-              <ScalarProperty Name="Id" ColumnName="DishId" />
-            </EndProperty>
-            <EndProperty Name="Ingredients">
-              <ScalarProperty Name="Id" ColumnName="IngredientId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

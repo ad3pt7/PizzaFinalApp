@@ -28,17 +28,27 @@
                    Margin="70,0,0,0"
                    FontWeight="Bold"/>
             <Button Click="Back" 
-                    Content="Назад"
+                    Content="Назад"                    
                     Height="25" 
                     Width="105"
                     HorizontalAlignment="Right"
                     Style="{StaticResource WhiteButton}"
                     Margin="0,0,25,0" />
         </Grid>
+        <StackPanel Grid.Row="1"
+                    Margin="25 50">
+            <Label Content="Наименование"/>
+            <TextBox x:Name="IngredientName"/>
+            <Label Content="Вес"/>
+            <TextBox x:Name="Weight"/>
+            <Label Content="Цена"/>
+            <TextBox x:Name="Price"/>
+        </StackPanel>
         <Button Content="Добавить"
                 Style="{StaticResource RedButton}"
                 Width="105"
                 Height="22"
+                Click="SaveChanges"
                 Grid.Row="2"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"

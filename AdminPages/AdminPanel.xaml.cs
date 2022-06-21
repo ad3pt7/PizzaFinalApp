@@ -37,7 +37,17 @@ namespace PizzaFinalApp.AdminPages
 
         private void DeletePizza(object sender, RoutedEventArgs e)
         {
-
+            if (PizzasListView.SelectedIndex != -1)
+            {
+                var selectedPizza = PizzasListView.SelectedItem as Dish;
+                context.Dishes.Remove(selectedPizza);
+                context.SaveChanges();
+                Navigator.Navigate(new AdminPanel());
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста выберите блюдо", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Back(object sender, RoutedEventArgs e)
@@ -108,6 +118,57 @@ namespace PizzaFinalApp.AdminPages
             {
                 var pizza = context.Dishes.ToList();
                 PizzasListView.ItemsSource = pizza.Where(u => u.Name.ToLower().Contains(PizzaFilter.Text.ToLower()));
+            }
+        }
+
+        private void EditIngredient(object sender, RoutedEventArgs e)
+        {
+            if (IngridientsList.SelectedIndex != -1)
+            {
+                Navigator.Navigate(new IngredientEdit(IngridientsList.SelectedItem as Ingredient));
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста выберите ингридиент", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddIngredient(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate(new IngredientEdit(null));
+        }
+
+        private void DeleteIngredient(object sender, RoutedEventArgs e)
+        {
+            if (IngridientsList.SelectedIndex != -1)
+            {
+                var selectedIngredient = IngridientsList.SelectedItem as Ingredient;
+                context.Ingredients.Remove(selectedIngredient);
+                var removeList = context.DishIngredients.Where(ing => ing.IngredientId == selectedIngredient.Id).ToList();
+                MessageBox.Show(removeList.Count.ToString());
+                foreach(DishIngredient ingredient in removeList)
+                {
+                    context.DishIngredients.Remove(ingredient);
+                }
+                context.SaveChanges();
+                Navigator.Navigate(new AdminPanel());
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста выберите ингридиент", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SearchCertainIngredient(object sender, TextChangedEventArgs e)
+        {
+            if (IngredientFilter.Text == "")
+            {
+                IngridientsList.ItemsSource = context.Ingredients.ToList();
+            }
+            else
+            {
+                var ingredients = context.Ingredients.ToList();
+                IngridientsList.ItemsSource = ingredients.Where(u => u.Name.ToLower().Contains(IngredientFilter.Text.ToLower()));
             }
         }
     }

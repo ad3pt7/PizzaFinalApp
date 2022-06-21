@@ -82,6 +82,9 @@
     <Compile Include="Dish.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DishIngredient.cs">
+      <DependentUpon>PizzaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ingredient.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
     </Compile>
@@ -237,11 +240,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <EntityDeploy Include="PizzaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PizzaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
     <None Include="PizzaModel.edmx.diagram">
       <DependentUpon>PizzaModel.edmx</DependentUpon>
     </None>
@@ -283,6 +286,11 @@
     <Resource Include="Images\img-7.png" />
     <Resource Include="Images\img-8.png" />
     <Resource Include="Images\img-9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="PizzaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PizzaModel.Context.cs</LastGenOutput>
@@ -294,10 +302,6 @@
       <LastGenOutput>PizzaModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

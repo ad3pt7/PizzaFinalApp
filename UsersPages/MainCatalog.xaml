@@ -68,7 +68,7 @@
                                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <CheckBox Content="Выбрать" VerticalAlignment="Center"/>
                                                 <Button Click="DecreaseAmountByOne" Content=" - " Style="{StaticResource RedButton}" Padding="5" Margin="5,0,5,0"/>
-                                                <TextBox Text="{Binding Amount}" TextChanged="InputPizzasAmount" Style="{StaticResource RedTextBox}" VerticalContentAlignment="Center" Width="80" HorizontalContentAlignment="Center"/>
+                                                <TextBox Text="{Binding Amount}" PreviewTextInput="InputPizzasAmount" Style="{StaticResource RedTextBox}" VerticalContentAlignment="Center" Width="80" HorizontalContentAlignment="Center"/>
                                                 <Button Click="IncreaseAmountByOne" Content=" + " Style="{StaticResource RedButton}" Padding="5" Margin="5,0,20,0"/>
                                             </StackPanel>
                                         </Grid>

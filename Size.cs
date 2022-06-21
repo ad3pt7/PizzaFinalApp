@@ -22,6 +22,7 @@ namespace PizzaFinalApp
         public int Weight { get; set; }
         [NotMapped]
         public int DishAmount { get; set; } = 0;
+
         public virtual Dish Dish { get; set; }
     }
 }

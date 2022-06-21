@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +21,39 @@ namespace PizzaFinalApp.AdminPages
     /// </summary>
     public partial class IngredientEdit : Page
     {
-        public IngredientEdit()
+        Ingredient editableIngredient = null;
+        PizzaContext context = new PizzaContext();
+        public IngredientEdit(Ingredient ingredient)
         {
             InitializeComponent();
+            if(ingredient != null)
+            {
+                editableIngredient = ingredient;
+
+                IngredientName.Text = editableIngredient.Name;
+                Weight.Text = editableIngredient.Weight.ToString();
+                Price.Text = editableIngredient.Price.ToString();
+            }
+            else
+            {
+                editableIngredient = new Ingredient();
+            }
         }
 
         private void Back(object sender, RoutedEventArgs e)
         {
+            Navigator.Navigate(new AdminPanel());
+        }
 
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            editableIngredient.Name = IngredientName.Text;
+            editableIngredient.Weight = Convert.ToInt32(Weight.Text);
+            editableIngredient.Price = Convert.ToInt32(Price.Text);
+
+            context.Ingredients.AddOrUpdate(editableIngredient);
+            context.SaveChanges();
+            Navigator.Navigate(new AdminPanel());
         }
     }
 }

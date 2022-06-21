@@ -11,19 +11,14 @@ namespace PizzaFinalApp
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public partial class OrderDish
+    
+    public partial class DishIngredient
     {
-        public int Id { get; set; }
+        public int DisnIngridientID { get; set; }
         public int DishId { get; set; }
-        public int Amount { get; set; }
-        public int SelectedDishSize { get; set; }
-        public int OrderId { get; set; }
-        [NotMapped]
-        public float DishCost => Amount * Dish.Price;
-
+        public int IngredientId { get; set; }
+    
         public virtual Dish Dish { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
     }
 }

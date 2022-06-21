@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using PizzaFinalApp;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace PizzaFinalApp.RegistrationPages
     public partial class Login : Page
     {
         PizzaContext context = new PizzaContext();
+        
         public Login()
         {
             InitializeComponent();
@@ -56,7 +58,7 @@ namespace PizzaFinalApp.RegistrationPages
                         File.Delete("../data.svg");
                     }
                 }
-                if(user.RightGroupId == 1)
+                if(user.RightGroupId == 3)
                 {
                     Navigator.Navigate(new AdminPages.AdminPanel());
                 }
