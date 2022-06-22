@@ -159,22 +159,22 @@ namespace PizzaFinalApp.UsersPages
 
         private void GoToMix(object sender, RoutedEventArgs e)
         {
+            Navigator.Navigate(new MixPage());
             //MessageBox.Show(dishToOrder.Count.ToString());
-            var order = new StringBuilder();
-            
-            foreach (Dish dish in dishToOrder)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    if(dish.Sizes.ToList()[i].DishAmount != 0)
-                    {
-                        PizzasInOrder++;
-                        order.AppendLine(dish.Name + " - " + dish.Sizes.ToList()[i].Size1 + " -- " + dish.Sizes.ToList()[i].DishAmount);
-                    }
-                }
-            }
-           // MessageBox.Show(order.ToString());
+            //var order = new StringBuilder();
 
+            //foreach (Dish dish in dishToOrder)
+            //{
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        if(dish.Sizes.ToList()[i].DishAmount != 0)
+            //        {
+            //            PizzasInOrder++;
+            //            order.AppendLine(dish.Name + " - " + dish.Sizes.ToList()[i].Size1 + " -- " + dish.Sizes.ToList()[i].DishAmount);
+            //        }
+            //    }
+            //}
+            // MessageBox.Show(order.ToString());
             //amountTextBox.Text = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount.ToString();
         }
 

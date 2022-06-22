@@ -44,6 +44,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBox Margin="15 5"
+                     x:Name="IngredientFilter"
+                     TextChanged="FindIngredient"
                      Height="23"/>
             <Button Grid.Column="1"
                     Style="{StaticResource RedButton}"
@@ -64,14 +66,14 @@
 
                 <!--<ListView.ItemTemplate>
 					<DataTemplate>-->
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<Grid Height="45"
+                <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="45"
                               Margin="5"
 							  Grid.Row="1" 
                               Grid.Column="0"
                               Background="#ffe5e5e5">
-							<Image Source="../Images/icon.png"
+                            <Image Source="../Images/icon.png"
                                    HorizontalAlignment="Left"
                                    Margin="3"/>
                             <Label Content="{Binding Name}"
@@ -80,31 +82,102 @@
                             <Label Content="{Binding Weight}"
                                    ContentStringFormat="{}{0}гр."
                                    Margin="40 15 0 0"/>
-							<Label Content="{Binding Price}"
+                            <Label Content="{Binding Price}"
                                    ContentStringFormat="{}{0}р."
                                    Margin="145 15 0 0"/>
-							<Button Style="{StaticResource RedButton}"
+                            <Button Style="{StaticResource RedButton}"
                                     Width="30"
                                     HorizontalAlignment="Right"
                                     Margin="15 0"
                                     Height="25"
                                     Content="+"/>
-							<TextBox Width="80"			
+                            <TextBox Width="80"			
                                      HorizontalAlignment="Right"
                                      Margin="50 0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
                                      Text="{Binding Amount}"
                                      Height="23"/>
-							<Button Style="{StaticResource RedButton}"
+                            <Button Style="{StaticResource RedButton}"
                                     Width="30"
                                     HorizontalAlignment="Right"
                                     Margin="135 0"
                                     Height="25"
                                     Content="-"/>
-						</Grid>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-
-		</Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0 5"
+                                          Background="LightGray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="45"
+                                               Height="45"
+                                               Margin="5"
+                                               Source="../Images/icon.png"/>
+                            <StackPanel Grid.Column="1">
+                                <Label Margin="0 0 0 5"
+                                                   Content="{Binding Name}"
+                                                   FontWeight="SemiBold" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="0 0 50 0"
+                                                       Content="{Binding Weight}"
+                                                       ContentStringFormat="{}{0}г." />
+                                    <Label Content="{Binding Price}"
+                                                       ContentStringFormat="{}{0}р." />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2"
+                                                    Margin="10 0"
+                                                    Orientation="Horizontal">
+                                <CheckBox x:Name="HasInPizza"
+                                                      VerticalAlignment="Center"
+                                                      IsEnabled="False"
+                                                      IsChecked="{Binding HasInPizza}"/>
+                                <Button Margin="5 0"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Center"
+                                                    Click="RemoveFromPizza"
+                                                    Style="{StaticResource RedButton}"
+                                                    Content="Убрать"/>
+                                <Button HorizontalAlignment="Right"
+                                                    Style="{StaticResource RedButton}"
+                                                    VerticalAlignment="Center"
+                                                    Click="AddToPizza"
+                                                    Content="Добавить" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Grid.Row="1"
+                        Margin="15 0"
+                        Grid.Column="1">
+                <Label x:Name="DishPrice"
+                       ContentStringFormat="{}Цена: {0}р."/>
+                <Label x:Name="DishWeight"
+                       ContentStringFormat="{}Вес: {0}р."/>
+                <Label Content="Размер:"/>
+                <RadioButton Content="23см"
+                             IsChecked="True"
+                             Click="ChangeSize"
+                             x:Name="Size23cm"
+                             Margin="0 5"/>
+                <RadioButton Content="30см"
+                             Click="ChangeSize"
+                             x:Name="Size30cm"
+                             Margin="0 5"/>
+                <RadioButton Content="40см"
+                             Click="ChangeSize"
+                             x:Name="Size40cm"
+                             Margin="0 5"/>
+            </StackPanel>
+        </Grid>
+        
 	</Grid>
 </Page>

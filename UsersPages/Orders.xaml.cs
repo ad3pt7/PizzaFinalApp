@@ -71,7 +71,7 @@ namespace PizzaFinalApp.UsersPages
 
         private void MakeOrder(object sender, RoutedEventArgs e)
         {
-
+            SaveUserInfo(currentUser);
         }
 
         public void LoadUserInfo(User user)
@@ -176,6 +176,8 @@ namespace PizzaFinalApp.UsersPages
                 user.RightGroupId = 2;
                 context.Users.AddOrUpdate(user);
                 context.SaveChanges();
+
+                Navigator.Navigate(new ChequePage(currentUser, orderList));
             }
         }
     }

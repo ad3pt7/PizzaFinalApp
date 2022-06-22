@@ -37,7 +37,7 @@ namespace PizzaFinalApp
         public int RightGroupId { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName} {MiddleName}";
-
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         public virtual RightGroup RightGroup { get; set; }

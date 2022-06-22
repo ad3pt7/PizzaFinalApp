@@ -35,15 +35,20 @@
                     Style="{StaticResource WhiteButton}"
                     Margin="0,0,25,0" />
         </Grid>
-
-        <TextBox Grid.Row="1"
-                 Margin="10"
-                 IsEnabled="False"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"/>
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="10">
+            <TextBox Grid.Row="1"
+                     Margin="10"
+                     x:Name="OrderCheque"
+                     IsEnabled="False"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"/>
+        </ScrollViewer>
         <Button Content="Сохранить"
                 Style="{StaticResource RedButton}"
                 Width="120"
+                Click="SaveCheque"
                 Height="24"
                 Grid.Row="2"
                 HorizontalAlignment="Right"

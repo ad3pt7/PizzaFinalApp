@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaFinalApp.RegistrationPages;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace PizzaFinalApp.AdminPages
 
         private void Back(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new Login());
         }
 
         private void AddUser(object sender, RoutedEventArgs e)
