@@ -19,7 +19,14 @@
         <Grid Background="#ffdd3333">
             <Image Source="../Images/icon(white).png" HorizontalAlignment="Left"/>
             <Label Content="Меню" Margin="64,0,0,0" Foreground="White" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-            <Button Click="GoToOrder" Content="Заказать" Height="25" Width="105" HorizontalAlignment="Right" Style="{StaticResource WhiteButton}" Margin="0,0,25,0" />
+            <Button Click="GoToOrder" 
+                    x:Name="GoToOrderButton"
+                    ContentStringFormat="{}Заказать: ({0})"
+                    Height="25" 
+                    Width="105"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource WhiteButton}"
+                    Margin="0,0,25,0" />
             <Button Click="GoToMix" Content="Микс X" Height="25" Width="105" HorizontalAlignment="Right" Style="{StaticResource WhiteButton}" Margin="0,0,160,0" />
         </Grid>
 
@@ -51,7 +58,7 @@
                                         <RowDefinition Height="50"/>
                                     </Grid.RowDefinitions>
                                     <Label Content="{Binding Name}" FontSize="16" FontWeight="Bold"/>
-                                    <Button Click="ChangePriceAndWeightTo23cm" Content="23 см." Style="{StaticResource RedButton}" Margin="0,0,160,0" Width="60" HorizontalAlignment="Right" Height="20" />
+                                    <Button x:Name="Cm23Button"  Click="ChangePriceAndWeightTo23cm" Content="23 см." Style="{StaticResource WhiteButton}" Margin="0,0,160,0" Width="60" HorizontalAlignment="Right" Height="20" />
                                     <Button Click="ChangePriceAndWeightTo30cm"  Content="30 см." Style="{StaticResource RedButton}"  Margin="0,0,90,0" Width="60" HorizontalAlignment="Right" Height="20"  />
                                     <Button Click="ChangePriceAndWeghtTo40cm"  Content="40 см." Style="{StaticResource RedButton}"  Margin="0,0,20,0" Width="60" HorizontalAlignment="Right" Height="20"  />
                                     <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap"/>

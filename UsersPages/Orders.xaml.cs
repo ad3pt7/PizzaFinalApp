@@ -21,15 +21,48 @@ namespace PizzaFinalApp.UsersPages
     public partial class Orders : Page
     {
         User currentUser;
-        public Orders(User user)
+        List<Dish> orderList;
+        public Orders(User user,List<Dish> dishes)
         {
             InitializeComponent();
             currentUser = user;
+            orderList = dishes;
+            CalculateAllPrice();
         }
 
         private void OpenMenu(object sender, RoutedEventArgs e)
         {
             Navigator.Navigate(new MainCatalog(currentUser));
+        }
+
+        public void CalculateAllPrice()
+        {
+            float orderSum = 0;
+            foreach (Dish dish in orderList)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (dish.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        orderSum += dish.Sizes.ToList()[i].DishAmount * dish.Sizes.ToList()[i].Price;
+                        //order.AppendLine(dish.Name + " - " + dish.Sizes.ToList()[i].Size1 + " -- " + dish.Sizes.ToList()[i].DishAmount);
+                    }
+                }
+            }
+            OrderSum.Content = orderSum.ToString();
+
+            double discount = 0;
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Wednesday)
+            {
+                discount = orderSum * 0.15f;
+                discount = Math.Round(discount, 2);
+                DiscountSum.Content = discount + "р. (15%)";
+            }
+            else
+            {
+                DiscountSum.Content = discount + "р. (0%)";
+            }
+            TotalSum.Content = (orderSum - discount);
         }
     }
 }

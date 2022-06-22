@@ -80,12 +80,15 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
-            <Label Content="Стоимость:"
+            <Label x:Name="OrderSum"
+                   ContentStringFormat="{}Стоимость {0}р."
                    FontWeight="Bold"/>
-            <Label Content="Стоимость:"
+            <Label x:Name="DiscountSum"
+                   ContentStringFormat="{}Скидка {0}"
                    Margin="0,22,0,0"
                    FontWeight="Bold"/>
-            <Label Content="Стоимость:"
+            <Label x:Name="TotalSum"
+                   ContentStringFormat="{}Итого {0}р."
                    Margin="0,44,0,0"
                    FontWeight="Bold"/>
             <Button Content="Заказать"

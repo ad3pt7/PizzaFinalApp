@@ -23,12 +23,15 @@ namespace PizzaFinalApp.UsersPages
     public partial class MainCatalog : Page
     {
         PizzaContext context = new PizzaContext();
+        List<Dish> dishToOrder = new List<Dish>();
+        int PizzasInOrder = 0;
         User currentUser;
         public MainCatalog(User user)
         {
             InitializeComponent();
             currentUser = user;
             PizzasListView.ItemsSource = context.Dishes.ToList();
+            GoToOrderButton.Content = PizzasInOrder.ToString();
 
         }
 
@@ -36,26 +39,37 @@ namespace PizzaFinalApp.UsersPages
         {
 //            MessageBox.Show("1");
             SwitchSizeOptionAndUpdateContext(sender, 0);
-            Button button = sender as Button;
-            button.Style = this.FindResource("WhiteButton") as Style;
+            SetActiveButtonRed(1, sender);
         }
 
         private void ChangePriceAndWeightTo30cm(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("2");
             SwitchSizeOptionAndUpdateContext(sender, 1);
-            Button button = sender as Button;
-            button.Style = this.FindResource("WhiteButton") as Style;
+            SetActiveButtonRed(2, sender);
         }
+
 
         private void ChangePriceAndWeghtTo40cm(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("3");
             SwitchSizeOptionAndUpdateContext(sender, 2);
-            Button button = sender as Button;
-            button.Style = this.FindResource("WhiteButton") as Style;
+            SetActiveButtonRed(3, sender);
         }
 
+        public void SetActiveButtonRed(int index,object sender)
+        {
+            var parent = ((sender as Button).Parent as Panel);
+            
+            for(int i =1; i< 4; i++)
+            {
+                var button = parent.Children[i] as Button;
+                button.Style = this.FindResource("RedButton") as Style;
+            }
+            var activeButton = parent.Children[index] as Button;
+            activeButton.Style = this.FindResource("WhiteButton") as Style;
+            
+        }
         private void DecreaseAmountByOne(object sender, RoutedEventArgs e)
         {
             var pizza = (sender as Button).DataContext as Dish;
@@ -65,12 +79,28 @@ namespace PizzaFinalApp.UsersPages
             //MessageBox.Show(currentSizeDishAmount.ToString());
             if (currentSizeDishAmount > 0)
             {
-                currentSizeDishAmount--;
+                bool hasInOrder = false;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (pizza.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        hasInOrder = true;
+                    }
+                }
+                if (currentSizeDishAmount == 1 && !hasInOrder)
+                {
+                    dishToOrder.Remove(pizza);
+                }
+                //currentSizeDishAmount--;
+                pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount--;
+                PizzasInOrder--;
+                GoToOrderButton.Content = PizzasInOrder.ToString();
             }
 
             var parent = ((sender as Button).Parent as Panel);
             var amountTextBox = parent.Children[2] as TextBox;
-            amountTextBox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            //amountTextBox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            amountTextBox.Text = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount.ToString();
         }
 
         private void IncreaseAmountByOne(object sender, RoutedEventArgs e)
@@ -80,8 +110,22 @@ namespace PizzaFinalApp.UsersPages
             //MessageBox.Show(currentSizeDishAmount.ToString());
             if (currentSizeDishAmount < 15)
             {
+                bool hasInOrder = false;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (pizza.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        hasInOrder = true;
+                    }
+                }
+                if (currentSizeDishAmount == 0 && !hasInOrder)
+                {
+                    dishToOrder.Add(pizza);
+                }
                 //currentSizeDishAmount++;
                 pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount++;
+                PizzasInOrder++;
+                GoToOrderButton.Content = PizzasInOrder.ToString();
             }
             //MessageBox.Show(currentSizeDishAmount.ToString());
             var parent = ((sender as Button).Parent as Panel);
@@ -97,32 +141,67 @@ namespace PizzaFinalApp.UsersPages
             pizza.SelectedSizeIndex = optionIndex;
             Debug.WriteLine(pizza.SelectedSizeIndex.ToString());
             var sourceParent = (sender as Button).Parent as Panel;
-            var targetParent = ((sourceParent.Children[6] as Panel).Children[0] as Panel);
+            var targetParent = (sourceParent.Children[6] as Panel).Children[0] as Panel;
 
             var priceTextBox = targetParent.Children[0] as Label;
             priceTextBox.GetBindingExpression(ContentProperty).UpdateTarget();
             var weightTextBox = targetParent.Children[1] as Label;
             weightTextBox.GetBindingExpression(ContentProperty).UpdateTarget();
-
+            var amountPartent = targetParent.Children[2] as Panel;
+            var amountTextBox = amountPartent.Children[2] as TextBox;
+            amountTextBox.Text = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount.ToString();
         }
 
         private void GoToOrder(object sender, RoutedEventArgs e)
         {
-            Navigator.Navigate(new Orders(currentUser));
+            Navigator.Navigate(new Orders(currentUser, dishToOrder));
         }
 
         private void GoToMix(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show(dishToOrder.Count.ToString());
+            var order = new StringBuilder();
+            
+            foreach (Dish dish in dishToOrder)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if(dish.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        PizzasInOrder++;
+                        order.AppendLine(dish.Name + " - " + dish.Sizes.ToList()[i].Size1 + " -- " + dish.Sizes.ToList()[i].DishAmount);
+                    }
+                }
+            }
+           // MessageBox.Show(order.ToString());
 
+            //amountTextBox.Text = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount.ToString();
         }
 
         private void InputPizzasAmount(object sender, TextCompositionEventArgs e)
         {
             var lettersRegex = new Regex(@"[\p{Ll}\p{Lt}]+");
+              //  MessageBox.Show((sender as TextBox).Text + " - ");
+            TextBox count = sender as TextBox;
+            if(count.Text == "")
+            {
+                count.Text = 0.ToString();
+            }
+            else
+            {
 
+            }
+            //if()
             if (lettersRegex.IsMatch(e.Text))
             {
-                e.Handled = true;
+                if(Convert.ToInt32((sender as TextBox).Text) < 15)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    (sender as TextBox).Text = "15";
+                }
             }
         }
     }
