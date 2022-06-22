@@ -53,7 +53,7 @@ namespace PizzaFinalApp.AdminPages
 
         private void Back(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Navigate(new AdminPanel());
         }
 
         private void SaveUserData(object sender, RoutedEventArgs e)

@@ -58,7 +58,7 @@ namespace PizzaFinalApp.RegistrationPages
                         File.Delete("../data.svg");
                     }
                 }
-                if(user.RightGroupId == 3)
+                if(user.RightGroupId == 1)
                 {
                     Navigator.Navigate(new AdminPages.AdminPanel());
                 }
