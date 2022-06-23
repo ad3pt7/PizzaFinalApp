@@ -59,7 +59,7 @@ namespace PizzaFinalApp.AdminPages
         private void SaveUserData(object sender, RoutedEventArgs e)
         {
             var lettersRegex = new Regex(@"[\p{Ll}\p{Lt}]+");
-            var phoneRegex = new Regex(@"^((\+7|8)+([0-9]){10})$");
+            var phoneRegex = new Regex(@"^((8)+([0-9]){10})$");
             var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 
             var errors = new StringBuilder();
@@ -91,7 +91,7 @@ namespace PizzaFinalApp.AdminPages
             var phone = Phone.Text;
             if (string.IsNullOrWhiteSpace(phone) || !phoneRegex.IsMatch(phone))
             {
-                errors.AppendLine("Телефон не может быть пустым и должен быть в правильном формате");
+                errors.AppendLine("Телефон не может быть пустым и должен быть в формате 89xxxxxxxxx");
             }
 
             var street = Street.Text;
@@ -149,6 +149,7 @@ namespace PizzaFinalApp.AdminPages
                 if(editableUser.Password is null)
                 {
                     editableUser.Password = password;
+                    editableUser.ID = context.Users.OrderByDescending(u => u.ID).FirstOrDefault().ID + 1;
                 }
                 editableUser.FirstName = firstName;
                 editableUser.LastName = lastName;
@@ -163,8 +164,25 @@ namespace PizzaFinalApp.AdminPages
                 editableUser.Porch = int.Parse(porch);
                 editableUser.RightGroupId = 2;
                 context.Users.AddOrUpdate(editableUser);
-                context.SaveChanges();
-                
+
+                try
+                {
+
+                    context.SaveChanges();
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
+                    {
+                        Debug.WriteLine("Object: " + validationError.Entry.Entity.ToString());
+                        Debug.WriteLine("");
+                        foreach (DbValidationError err in validationError.ValidationErrors)
+                        {
+                            Debug.WriteLine(err.ErrorMessage + "");
+                        }
+                    }
+                }
                 Navigator.Navigate(new AdminPanel());
             }
         }

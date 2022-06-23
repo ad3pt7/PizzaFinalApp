@@ -34,7 +34,7 @@ namespace PizzaFinalApp.RegistrationPages
 
         private void NextStep(object sender, RoutedEventArgs e)
         {
-            var phoneRegex = new Regex(@"^((\+7|8)+([0-9]){10})$");
+            var phoneRegex = new Regex(@"^((8)+([0-9]){10})$");
             if(!string.IsNullOrWhiteSpace(UserPhone.Text) && phoneRegex.IsMatch(UserPhone.Text))
             {
                 RegistrationUser.Phone = UserPhone.Text;

@@ -31,6 +31,7 @@ namespace PizzaFinalApp.RegistrationPages
         {
             User newUser = new User
             {
+                ID = context.Users.OrderByDescending(u => u.ID).FirstOrDefault().ID+1,
                 Login = RegistrationUser.Login,
                 Email = RegistrationUser.Email,
                 FirstName = RegistrationUser.FirstName,

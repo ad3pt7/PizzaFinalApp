@@ -98,6 +98,7 @@
                             Click="DeleteUser"
                             Style="{StaticResource RedButton}" Grid.Column="1"/>
                     <Button Content="Экспорт"
+                            Click="ExportUsers"
                             Width="75"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
@@ -106,6 +107,7 @@
                             Style="{StaticResource RedButton}" Grid.Column="1"/>
                     <Button Content="Импорт"
                             Width="75"
+                            Click="ImportUsers"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Margin="00 0 20 5"
@@ -217,6 +219,7 @@
                             Style="{StaticResource RedButton}"/>
                     <Button Content="Экспорт"
                             Width="75"
+                            Click="ExportDishes"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Margin="0 0 140 5"
@@ -224,6 +227,7 @@
                             Style="{StaticResource RedButton}" Grid.Column="1"/>
                     <Button Content="Импорт"
                             Width="75"
+                            Click="ImportDishes"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Margin="00 0 20 5"
@@ -284,6 +288,7 @@
                             Style="{StaticResource RedButton}"/>
                     <Button Content="Экспорт"
                             Width="75"
+                            Click="ExportIngredients"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Margin="0 0 140 5"
@@ -291,6 +296,7 @@
                             Style="{StaticResource RedButton}"/>
                     <Button Content="Импорт"
                             Width="75"
+                            Click="ImportIngredient"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Margin="00 0 20 5"
@@ -301,6 +307,8 @@
             <TabItem Header="Заказы">
                 <Grid Background="#ffe5e5e5">
                     <TextBox Height="23" 
+                             x:Name="OrdersFilter"
+                             TextChanged="SearchCertainOrder"
                              VerticalAlignment="Top"
                              Margin="10 10 10 0"/>
                     <ListView x:Name="OrdersList"
@@ -321,12 +329,13 @@
                                                 DisplayMemberBinding="{Binding TotalCost}"/>
                                 <GridViewColumn Header="Статус"
                                                 Width="60"
-                                                DisplayMemberBinding="{Binding OrderStatus}"/>
+                                                DisplayMemberBinding="{Binding OrderStatus.OrderStatus1}"/>
                                 <GridViewColumn Header="Действия"
                                                 Width="100">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Изменить"
+                                                    Click="EditOrderStatus"
                                                     Style="{StaticResource RedButton}"
                                                     Width="80"
                                                     Height="25"/>

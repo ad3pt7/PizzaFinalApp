@@ -72,6 +72,33 @@ namespace PizzaFinalApp.UsersPages
         private void MakeOrder(object sender, RoutedEventArgs e)
         {
             SaveUserInfo(currentUser);
+            Order order = new Order
+            {
+                StatusId = 1,
+                UserId = currentUser.ID,
+                Date = DateTime.Now
+            };
+            context.Orders.Add(order);
+            foreach(Dish dish in orderList)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (dish.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        OrderDish orderDish = new OrderDish
+                        {
+                            DishId = dish.Id,
+                            Amount = dish.Sizes.ToList()[i].DishAmount,
+                            SelectedDishSize = dish.Sizes.ToList()[i].Size1,
+                            OrderId = order.Id
+                        };
+                        context.OrderDishes.Add(orderDish);
+                        //order.AppendLine(dish.Name + " - " + dish.Sizes.ToList()[i].Size1 + " -- " + dish.Sizes.ToList()[i].DishAmount);
+                    }
+                }
+            }
+            context.SaveChanges();
+            Navigator.Navigate(new ChequePage(currentUser, orderList));
         }
 
         public void LoadUserInfo(User user)
@@ -176,8 +203,6 @@ namespace PizzaFinalApp.UsersPages
                 user.RightGroupId = 2;
                 context.Users.AddOrUpdate(user);
                 context.SaveChanges();
-
-                Navigator.Navigate(new ChequePage(currentUser, orderList));
             }
         }
     }

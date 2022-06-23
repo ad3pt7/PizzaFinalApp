@@ -342,7 +342,9 @@
           <NavigationProperty Name="RightGroup" Relationship="Self.FK_Users_RightGroups" FromRole="Users" ToRole="RightGroups" />
         </EntityType>
         <Association Name="FK_DishIngredients_Dish">
-          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" />
+          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DishIngredients" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dishes">
@@ -354,7 +356,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDishes_Dishes">
-          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" />
+          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OrderDishes" Type="Self.OrderDish" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dishes">
@@ -366,7 +370,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Size_Dish">
-          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" />
+          <End Role="Dishes" Type="Self.Dish" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sizes" Type="Self.Size" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dishes">
@@ -378,7 +384,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DishIngredients_Ingredients">
-          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DishIngredients" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ingredients">
@@ -390,7 +398,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDishes_Orders">
-          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OrderDishes" Type="Self.OrderDish" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -402,7 +412,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_OrderStatuses">
-          <End Role="OrderStatuses" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="OrderStatuses" Type="Self.OrderStatus" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderStatuses">
@@ -414,7 +426,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -426,7 +440,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_RightGroups">
-          <End Role="RightGroups" Type="Self.RightGroup" Multiplicity="1" />
+          <End Role="RightGroups" Type="Self.RightGroup" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RightGroups">

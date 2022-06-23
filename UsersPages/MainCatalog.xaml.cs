@@ -26,6 +26,7 @@ namespace PizzaFinalApp.UsersPages
         List<Dish> dishToOrder = new List<Dish>();
         int PizzasInOrder = 0;
         User currentUser;
+        int PizzaAmount = 0;
         public MainCatalog(User user)
         {
             InitializeComponent();
@@ -159,7 +160,7 @@ namespace PizzaFinalApp.UsersPages
 
         private void GoToMix(object sender, RoutedEventArgs e)
         {
-            Navigator.Navigate(new MixPage());
+            Navigator.Navigate(new MixPage(currentUser));
             //MessageBox.Show(dishToOrder.Count.ToString());
             //var order = new StringBuilder();
 
@@ -181,28 +182,162 @@ namespace PizzaFinalApp.UsersPages
         private void InputPizzasAmount(object sender, TextCompositionEventArgs e)
         {
             var lettersRegex = new Regex(@"[\p{Ll}\p{Lt}]+");
-              //  MessageBox.Show((sender as TextBox).Text + " - ");
             TextBox count = sender as TextBox;
-            if(count.Text == "")
-            {
-                count.Text = 0.ToString();
-            }
-            else
-            {
+            //if (count.Text == "")
+            //{
+            //    count.Text = 0.ToString();
+            //}
+            //else
+            //{
 
-            }
-            //if()
+            //}
+            ////if()
             if (lettersRegex.IsMatch(e.Text))
             {
-                if(Convert.ToInt32((sender as TextBox).Text) < 15)
-                {
+                //if (Convert.ToInt32((sender as TextBox).Text) < 15)
+                //{
                     e.Handled = true;
-                }
-                else
-                {
-                    (sender as TextBox).Text = "15";
-                }
+                //}
+                //else
+                //{
+                //    (sender as TextBox).Text = "15";
+                //}
             }
+        }
+
+        private void CheckAmount(object sender, RoutedEventArgs e)
+        {
+            var pizza = (sender as TextBox).DataContext as Dish;
+            TextBox amount = sender as TextBox;
+            if(PizzaAmount == 0)
+            {
+                if(Convert.ToInt32(amount.Text) > 15)
+                {
+                    pizza.Amount = 15;
+                }
+                bool hasInOrder = false;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (pizza.Sizes.ToList()[i].DishAmount != 0)
+                    {
+                        hasInOrder = true;
+                    }
+                }
+                if (hasInOrder == false)
+                {
+                    dishToOrder.Add(pizza);
+                }
+                PizzasInOrder += pizza.Amount;
+                GoToOrderButton.Content = PizzasInOrder.ToString();
+            }
+
+            
+            //int inputCount = Convert.ToInt32(amount.Text);
+            //if(amount.Text == "")
+            //{    
+            //    bool hasInOrder = false;
+            //    pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount = 0;
+            //    amount.Text = 0.ToString();
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        if (pizza.Sizes.ToList()[i].DishAmount != 0)
+            //        {
+            //            hasInOrder = true;
+            //        }
+            //    }
+            //    if (!hasInOrder)
+            //    {
+            //        dishToOrder.Remove(pizza);
+            //        PizzasInOrder -= inputCount;
+            ////        if(pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount != 0)
+            //    }
+            //    GoToOrderButton.Content = PizzasInOrder.ToString();
+            //}
+            ////MessageBox.Show(dishToOrder.Count.ToString());
+            
+            //var pizza = (sender as TextBox).DataContext as Dish;
+            //if ((sender as TextBox).Text == "")
+            //{
+            //    (sender as TextBox).Text = 0.ToString();
+            //}
+            //else
+            //{
+            //    if(int.Parse((sender as TextBox).Text) > 15)
+            //    {
+            //        (sender as TextBox).Text = 15.ToString();
+            //        {
+            //            int count = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount;
+            //            pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount = 15;
+            //            int totalCount = 15 ;
+            //            MessageBox.Show(count + " - " + totalCount);
+            //            PizzasInOrder += count;
+
+            //            GoToOrderButton.Content = PizzasInOrder.ToString();
+            //        }
+            //    }
+            //if(int.Parse((sender as TextBox).Text) < 0)
+            //{
+            //    int count = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount;
+            //    if(count > 0)
+            //    {
+
+            //    }
+            //    (sender as TextBox).Text = 0.ToString();
+            //    pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount = 0;
+            //}
+            //else
+            //{
+            //    if (int.Parse((sender as TextBox).Text) > 15)
+            //    {
+            //        (sender as TextBox).Text = 15.ToString();
+            //        int count = pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount;
+            //        pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount = 15;
+            //        int totalCount = 15 - count;
+            //        PizzasInOrder += count;
+            //        GoToOrderButton.Content = PizzasInOrder.ToString();
+            //        if (count < 15)
+            //        {
+            //            bool hasInOrder = false;
+            //            for (int i = 0; i < 3; i++)
+            //            {
+            //                if (pizza.Sizes.ToList()[i].DishAmount != 0)
+            //                {
+            //                    hasInOrder = true;
+            //                }
+            //            }
+            //            if (count == 0 && !hasInOrder)
+            //            {
+            //                dishToOrder.Add(pizza);
+            //            }
+            //            //currentSizeDishAmount++;
+            //            pizza.Sizes.ToList()[pizza.SelectedSizeIndex].DishAmount++;
+            //            PizzasInOrder++;
+            //            GoToOrderButton.Content = PizzasInOrder.ToString();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        bool hasInOrder = false;
+            //        for (int i = 0; i < 3; i++)
+            //        {
+            //            if (pizza.Sizes.ToList()[i].DishAmount != 0)
+            //            {
+            //                hasInOrder = true;
+            //            }
+            //        }
+            //        if (count == 0 && !hasInOrder)
+            //        {
+            //            dishToOrder.Add(pizza);
+            //        }
+            //    }
+            //}
+        }
+
+        private void ChangeAmount(object sender, RoutedEventArgs e)
+        {
+            var pizza = (sender as TextBox).DataContext as Dish;
+            PizzaAmount = pizza.Amount;
         }
     }
 }
+
