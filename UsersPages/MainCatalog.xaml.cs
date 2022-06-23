@@ -223,11 +223,12 @@ namespace PizzaFinalApp.UsersPages
                         hasInOrder = true;
                     }
                 }
-                if (hasInOrder == false)
+                if (hasInOrder == true)
                 {
                     dishToOrder.Add(pizza);
                 }
-                PizzasInOrder += pizza.Amount;
+                PizzasInOrder += pizza.Amount - PizzaAmount;
+                amount.Text = pizza.Amount.ToString();
                 GoToOrderButton.Content = PizzasInOrder.ToString();
             }
 

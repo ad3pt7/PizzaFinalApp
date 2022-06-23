@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PizzaFinalApp.AdminPages"
+      xmlns:local="clr-namespace:PizzaFinalApp.AdminPages" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="410" d:DesignWidth="782"
       Title="AdminPanel">
@@ -348,9 +348,18 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика">
-                <Grid Background="#ffe5e5e5">
-                    <Canvas/>
-                </Grid>
+                <lvc:CartesianChart LegendLocation="Right"
+                                    x:Name="Graphic"
+                                        Series="{Binding SeriesCollection}">
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Продажи"
+                                      LabelFormatter="{Binding YFormatter}" />
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Дата"
+                                      Labels="{Binding Labels}" />
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
 
             </TabItem>
         </TabControl>

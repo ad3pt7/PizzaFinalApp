@@ -46,7 +46,7 @@ namespace PizzaFinalApp.AdminPages
 
                 //Ингредиенты
                 List<Ingredient> pizzaIngredient = context.DishIngredients.Where(i => i.DishId == editableDish.Id).Select(d =>d.Ingredient).ToList();
-                MessageBox.Show(pizzaIngredient.Count.ToString());
+                //MessageBox.Show(pizzaIngredient.Count.ToString());
                 foreach (Ingredient ingredient in ingredients)
                 {
                     foreach (Ingredient pizzaIngredient1 in pizzaIngredient)
@@ -59,7 +59,7 @@ namespace PizzaFinalApp.AdminPages
                     }
                 }
                 var size = editableDish.Sizes.ToList()[0];
-                MessageBox.Show(size.Id + " | " + size.Price + " | " + size.Weight + " | " + size.DishId);
+                //MessageBox.Show(size.Id + " | " + size.Price + " | " + size.Weight + " | " + size.DishId);
                 PriceFor23cm.Text = editableDish.Sizes.ToList()[0].Price.ToString();
                 WeightFor23cm.Text = editableDish.Sizes.ToList()[0].Weight.ToString();
                 PriceFor30cm.Text = editableDish.Sizes.ToList()[1].Price.ToString();
@@ -232,7 +232,7 @@ namespace PizzaFinalApp.AdminPages
                     editableDish = new Dish();
                     var index = context.Dishes.OrderByDescending(x => x.Id).FirstOrDefault().Id + 1;
                     //(from m in db.Таблица select m.Нужное_поле
-                    MessageBox.Show(index.ToString());
+                   // MessageBox.Show(index.ToString());
                     editableDish.Id = index;
                     sizes.Add(new Size { Size1 = 23 });
                     sizes.Add(new Size { Size1 = 30 });

@@ -1,4 +1,6 @@
-﻿using PizzaFinalApp.RegistrationPages;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using PizzaFinalApp.RegistrationPages;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -25,6 +27,10 @@ namespace PizzaFinalApp.AdminPages
     public partial class AdminPanel : Page
     {
         PizzaContext context = new PizzaContext();
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> YFormatter { get; set; }
+
         public AdminPanel()
         {
             InitializeComponent();
@@ -32,6 +38,7 @@ namespace PizzaFinalApp.AdminPages
             PizzasListView.ItemsSource = context.Dishes.ToList();
             IngridientsList.ItemsSource = context.Ingredients.ToList();
             OrdersList.ItemsSource = context.Orders.ToList();
+            MakeGraphic();
         }
 
         private void EditPizza(object sender, RoutedEventArgs e)
@@ -100,7 +107,7 @@ namespace PizzaFinalApp.AdminPages
 
         private void AddPizza(object sender, RoutedEventArgs e)
         {
-            
+
             Navigator.Navigate(new DishEdit(null));
         }
 
@@ -155,7 +162,7 @@ namespace PizzaFinalApp.AdminPages
                 context.Ingredients.Remove(selectedIngredient);
                 var removeList = context.DishIngredients.Where(ing => ing.IngredientId == selectedIngredient.Id).ToList();
                 //MessageBox.Show(removeList.Count.ToString());
-                foreach(DishIngredient ingredient in removeList)
+                foreach (DishIngredient ingredient in removeList)
                 {
                     context.DishIngredients.Remove(ingredient);
                 }
@@ -187,12 +194,12 @@ namespace PizzaFinalApp.AdminPages
             {
                 File.Delete("Ingredients.svg");
             }
-            if(context.Ingredients.Count() > 0)
+            if (context.Ingredients.Count() > 0)
             {
                 StreamWriter writer = new StreamWriter("Ingredients.svg");
                 foreach (Ingredient ingredient in context.Ingredients.ToList())
                 {
-                    var data = $"{ingredient.Id}|{ingredient.Name}|{ingredient.Price}|{ingredient.Weight}" ;
+                    var data = $"{ingredient.Id}|{ingredient.Name}|{ingredient.Price}|{ingredient.Weight}";
                     writer.WriteLine(data);
                 }
                 writer.Close();
@@ -211,7 +218,7 @@ namespace PizzaFinalApp.AdminPages
             fileDialog.InitialDirectory = "C:\\";
             fileDialog.Filter = "SVG (*.svg)|*.svg";
             fileDialog.ShowDialog();
-            if(fileDialog.FileName != "")
+            if (fileDialog.FileName != "")
             {
                 StreamReader reader = new StreamReader(fileDialog.FileName);
                 while (!reader.EndOfStream)
@@ -302,7 +309,7 @@ namespace PizzaFinalApp.AdminPages
                 System.Windows.MessageBox.Show("Файл для импорта не выбран");
             }
         }
- 
+
 
         private void ImportDishes(object sender, RoutedEventArgs e)
         {
@@ -315,7 +322,7 @@ namespace PizzaFinalApp.AdminPages
                 StreamReader reader = new StreamReader(fileDialog.FileName);
                 while (!reader.EndOfStream)
                 {
-                    Dish dish= new Dish();
+                    Dish dish = new Dish();
 
                     string[] data = reader.ReadLine().Split(';');
                     dish.Id = Convert.ToInt32(data[0]);
@@ -363,13 +370,13 @@ namespace PizzaFinalApp.AdminPages
         private void EditOrderStatus(object sender, RoutedEventArgs e)
         {
             Order order = (sender as System.Windows.Controls.Button).DataContext as Order;
-            if(order.StatusId != context.OrderStatuses.OrderByDescending(os => os.Id).FirstOrDefault().Id)
+            if (order.StatusId != context.OrderStatuses.OrderByDescending(os => os.Id).FirstOrDefault().Id)
             {
                 order.StatusId++;
             }
             else
             {
-                System.Windows.MessageBox.Show("Заказ имеет окончательный статус", "Уведомление",MessageBoxButton.OK);
+                System.Windows.MessageBox.Show("Заказ имеет окончательный статус", "Уведомление", MessageBoxButton.OK);
             }
             context.Orders.AddOrUpdate(order);
             context.SaveChanges();
@@ -378,6 +385,7 @@ namespace PizzaFinalApp.AdminPages
 
         private void SearchCertainOrder(object sender, TextChangedEventArgs e)
         {
+
             if (OrdersFilter.Text == "")
             {
                 OrdersList.ItemsSource = context.Orders.ToList();
@@ -388,5 +396,27 @@ namespace PizzaFinalApp.AdminPages
                 OrdersList.ItemsSource = orders.Where(u => u.FullName.ToLower().Contains(OrdersFilter.Text.ToLower()));
             }
         }
+
+        public void MakeGraphic()
+        {
+            DataContext = this;
+            //SeriesCollection SeriesCollection;
+            //string[] Labels;
+            //Func<double, string> YFormatter;
+
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Продажи в день",
+                    Values = new ChartValues<int>(context.Orders.Select(o => o.OrderDishes.Select(od => od.Amount).Sum()))
+                }
+            };
+            var labels = context.Orders.ToArray().Select(o => o.Date.ToString("dd-mm-yyyy")).ToArray();
+            Labels = labels;
+            YFormatter = value => value.ToString("N");
+
+        }
+    
     }
 }
