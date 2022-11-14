@@ -86,6 +86,7 @@
     <Compile Include="AdminPages\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CacheFacade.cs" />
     <Compile Include="Dish.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
     </Compile>
@@ -94,6 +95,9 @@
     </Compile>
     <Compile Include="Ingredient.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemsOutputPage.xaml.cs">
+      <DependentUpon>ItemsOutputPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>PizzaModel.tt</DependentUpon>
@@ -172,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminPages\UserEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItemsOutputPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
